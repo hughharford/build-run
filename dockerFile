@@ -4,7 +4,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM buildpack-deps:bullseye
+FROM ubuntu:20.04
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
@@ -28,11 +28,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # standard issue update && ...
 RUN apt-get update && apt-get install -y apt-transport-https
 
-# HSTH: STEPS to install a few extras
+# HSTH: STEP to install a few extras
 RUN apt-get install -y \
 		unzip \
 		curl \
 		python3-pip
+
+# HSTH: STEP to install a few extras
+RUN snap install docker
+
 
 ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
 ENV PYTHON_VERSION 3.10.1
@@ -114,8 +118,8 @@ RUN set -ex; \
 	rm -f get-pip.py
 
 # HSTH fulfill from requirements.txt
-COPY /docs/requirements.txt requirements.txt
-RUN python3 -m pip install -r requirements.txt
+# COPY /docs/requirements.txt requirements.txt
+# RUN python3 -m pip install -r requirements.txt
 
 
 CMD ["python3"]
