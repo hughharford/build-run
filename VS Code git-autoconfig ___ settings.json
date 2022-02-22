@@ -1,0 +1,24 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "yaml.schemas": {
+        "file:///home/hsth/.vscode/extensions/atlassian.atlascode-2.10.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "redhat.telemetry.enabled": false,
+    "maven.terminal.useJavaHome": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.zoomLevel": 2,
+    "python.globalModuleInstallation": true,
+    
+    "git-autoconfig.configList":
+        [
+            {"user.email": "hugh.harford@poscoconsulting.com", "user.name": "hughharford"}
+        ],
+        "github.gitAuthentication": true,
+        "git-autoconfig.ignoreRootList": [
+            "/home/hsth/git/katas-python"
+        ]
+
+    
+
+    }
