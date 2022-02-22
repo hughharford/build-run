@@ -1,0 +1,149 @@
+# Automation of software for Linux upgrade to containerised 
+
+##############
+#
+#
+#
+#
+#
+
+
+# @@@@@@@@@@@@@@@@ LIVE VERSION NOW IN ECLIPSE OR SIMILAR...
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+#
+#
+#
+#
+#
+
+
+#
+#
+#
+#
+#
+
+#
+#
+#
+#
+#
+# ***** UPDATE NOTES
+
+# 21 11 15 - potential follow on from previous list of software etc to install:
+
+
+#### DOCKER BASE
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+
+# Use Python base?
+###                    https://www.flownative.com/en/blog/choosing-a-secure-docker-base-image.html
+## @@@ Choose Debian as Docker base to add Python to..
+
+
+
+# ALWAYS RUN THIS FIRST:
+sudo apt-get update
+
+
+#### USEFUL OTHER SOFTWARE 
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+
+### VCARVE PRO for CNC
+# Download: VCarveProTrialEdition_Setup.exe 
+# from: https://portal.vectric.com/
+
+# ~~ RUN wine VCarveProTrialEdition_Setup.exe
+
+### WINE for windows emulation
+# ~~ RUN sudo apt install winetricks
+# ~~ TRY_TRY winetricks vcrun2015 (takes a while)
+# ~~ OR wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+
+
+
+#### PYTHON INSTALLATION ETC
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Jupyter Notebook
+# ~~ pip install notebook
+# TO RUN Jupyter Notebook:
+# terminal:			Jupyter Notebook 
+
+# ~~ pip install jupyterthemes  # for dark mode
+# ~~ pip install --upgrade jupyterthemes
+# c.f. https://github.com/dunovank/jupyter-themes
+# usage: 
+# 	jt -t monokai
+#	
+#	and then notebooks as usual...
+
+##### installing Python3.9
+# ~~ sudo apt install software-properties-common
+# ~~ sudo add-apt-repository ppa:deadsnakes/ppa
+# ~~ sudo apt install python3.9
+
+### sudo apt-get update
+# ~~ sudo apt-get install build-essential
+# ~~ sudo apt-get install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
+# ~~ sudo apt-get install python3-pandas
+# **** THIS WORKED FOR PANDAS INSTALL
+
+
+#### SciPy installation 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+pip install -U scikit-learn
+
+# In order to check your installation you can use:
+
+python -m pip show scikit-learn  # to see which version and where scikit-learn is installed
+python -m pip freeze  # to see all packages installed in the active virtualenv
+python -c "import sklearn; sklearn.show_versions()"
+
+
+#### ALL THE OBVIOUS ONES
+
+# ~~ apt
+# ~~ zip
+# sudo apt-get install p7zip-full
+
+
+# ~~ gcc
+
+# ?
+#~~ mono  
+
