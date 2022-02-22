@@ -12,16 +12,24 @@
 # manually install to get the dockerfile etc
 
 # Some sort of browser to get dockerfile
+
+# snap 
+
 # docker
+RUN snap install docker
 
 
+
+# INSTALLS ALREADY PROVIDED
+
+# come with Ubuntu 20.04:
+
+# snap	git	ssh
 
 
 # INSTALLS NEEDED
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-# docker
-# git
 
 # chrome
 # zoom
