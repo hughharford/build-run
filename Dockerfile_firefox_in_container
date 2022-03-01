@@ -1,0 +1,41 @@
+###
+
+#
+#       http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/
+#
+#       For running Firefox in a container
+#
+#
+#       BUILD:
+#           docker build -t firefox:latest .
+#
+#       RUN CONTAINER:
+#           sudo docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix firefox:latest
+#
+#
+#       
+#       OUTCOME _____ OUTCOME _____ OUTCOME _____ OUTCOME _____ OUTCOME _____ OUTCOME _____ 
+#
+#           This runs firefox nicely, with the added line at line 27. 
+#           Video on the bbc news site don't work, but otherwise seems fairly stable after a quick check
+
+
+FROM ubuntu:20.04
+
+RUN apt-get update && apt-get install -y firefox
+
+# additional line, based on some comments from the REF above
+RUN apt-get install -y sudo
+
+# Replace 1000 with your user / group id
+RUN export uid=1000 gid=1000 && \
+    mkdir -p /home/developer && \
+    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
+    echo "developer:x:${uid}:" >> /etc/group && \
+    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
+    chmod 0440 /etc/sudoers.d/developer && \
+    chown ${uid}:${gid} -R /home/developer
+
+USER developer
+ENV HOME /home/developer
+CMD /usr/bin/firefox

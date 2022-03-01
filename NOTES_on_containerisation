@@ -80,6 +80,7 @@ sudo apt-get update
 
 
 #### USEFUL OTHER SOFTWARE 
+# ___ BUT NOT ___ NOT ___ NOT ___ NOT ___ NOT ___ NEEDED 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 
 ### VCARVE PRO for CNC
@@ -92,11 +93,6 @@ sudo apt-get update
 # ~~ RUN sudo apt install winetricks
 # ~~ TRY_TRY winetricks vcrun2015 (takes a while)
 # ~~ OR wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
-
-
-
-#### PYTHON INSTALLATION ETC
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Jupyter Notebook
 # ~~ pip install notebook
@@ -111,28 +107,35 @@ sudo apt-get update
 #	
 #	and then notebooks as usual...
 
+#### PYTHON INSTALLATION with PANDAS, SCIPY ETC below
+#
+# BUT ___ VERSION  ___ VERSION  ___ VERSION  ___ VERSION  ___ VERSION 
+# AND AND ___ VENV etc ___ VENV etc ___ VENV etc ___ VENV etc ___ VENV etc ___ VENV etc ___ VENV etc 
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+
 ##### installing Python3.9
 # ~~ sudo apt install software-properties-common
 # ~~ sudo add-apt-repository ppa:deadsnakes/ppa
 # ~~ sudo apt install python3.9
 
-### sudo apt-get update
-# ~~ sudo apt-get install build-essential
-# ~~ sudo apt-get install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
-# ~~ sudo apt-get install python3-pandas
-# **** THIS WORKED FOR PANDAS INSTALL
+# **** PANDAS INSTALL
+# THIS WORKED 
 
+### apt-get update
+# ~~ apt-get install build-essential
+# ~~ apt-get install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
+# ~~ apt-get install python3-pandas
 
 #### SciPy installation 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pip install -U scikit-learn
+# pip install -U scikit-learn
 
 # In order to check your installation you can use:
 
-python -m pip show scikit-learn  # to see which version and where scikit-learn is installed
-python -m pip freeze  # to see all packages installed in the active virtualenv
-python -c "import sklearn; sklearn.show_versions()"
+# python -m pip show scikit-learn  # to see which version and where scikit-learn is installed
+# python -m pip freeze  # to see all packages installed in the active virtualenv
+# python -c "import sklearn; sklearn.show_versions()"
 
 
 #### ALL THE OBVIOUS ONES
@@ -141,9 +144,10 @@ python -c "import sklearn; sklearn.show_versions()"
 # ~~ zip
 # sudo apt-get install p7zip-full
 
-
-# ~~ gcc
-
-# ?
-#~~ mono  
-
+apt-get install rsync \
+    apt \
+    zip \
+    # git, snap, rsync \ # etc ___ all included in ubuntu 20.04
+    xxx \
+    # docker \ # see existing dockerfile
+    \
