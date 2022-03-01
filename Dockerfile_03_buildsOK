@@ -45,10 +45,10 @@ RUN apt-get install -y \
 		curl \
 		wget \
 		snap \
-		virtualenv \			
-			# https://docs.python.org/3/tutorial/venv.html
+		virtualenv \
 		software-properties-common \
 		python3-pip
+
 
 #
 # Further useful:
@@ -61,37 +61,33 @@ RUN apt-get install -y \
 #	NOTE how more complex get-pip.py with specific versions is sidestepped below
 
 ######   
-# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ###### 
 #		INSTALL NOTES  
 ######   
-# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ######   
 #
 # ALREADY INSTALLED WITH UBUNTU_20.04
 #			Document viewer - for pdf 
 #			SNAP
 #			GIT	(fullname, Bird date punkt)
-
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+#
 # NOT INCLUDED WITH UBUNTU_20.04
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+#
 # so install manually once set up, or?
 #
-#		Spotify (old e)
-# NOT WORKING: (unsure why, seemed to work ok in U_20.04 root)
+#		Spotify (old e, renewed lyric)
+# NOT WORKING:
 #			RUN snap install spotify
 
 # 		VLC
-#				REF: it's complicated, see: https://launchpad.net/ubuntu/+source/vlc
-#					=> manual installation for now
+# NOT WORKING:
 #			RUN apt-get install VLC
 
-#		Office365WebDesktop for linux (posco)
+#		Office365WebDesktop for linux (posco e, lyric and and)
 # NOT WORKING:
 #			RUN snap install unofficial-webapp-office
 
-#		Slack (posco, yetitool.com, quantconnect?)
+#		Slack (posco e, )
 # NOT WORKING:
 #			RUN snap install slack --classic
 
@@ -134,9 +130,10 @@ RUN apt-get install -y \
 			# RUN mkdir tmp
 			RUN cd tmp 
 			RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
-			# RUN yes "yes" | bash Anaconda3-2021.11-Linux-x86_64.sh
-				# NOT NEEDED: RUN ( echo yes ; echo -e "\n" ) | bash Anaconda3-2021.11-Linux-x86_64.sh
+			RUN bash Anaconda3-2021.11-Linux-x86_64.sh 
+			# NEEDS INPUT...  
 			RUN cd ~
+			# RUN exit		# not needed?? 
 			# rmdir tmp 	# rmdir won't work as not empty!
 
 # 		Anaconda Navigator () NO NEED FOR ADDITIONAL INSTALLTION
@@ -185,11 +182,14 @@ RUN set -ex \
 	\
 	&& wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
 	&& wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
+	
+	
 #	&& export GNUPGHOME="$(mktemp -d)" \
 #	&& gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$GPG_KEY" \
 #	&& gpg --batch --verify python.tar.xz.asc python.tar.xz \
 #	&& { command -v gpgconf > /dev/null && gpgconf --kill all || :; } \
 #	&& rm -rf "$GNUPGHOME" python.tar.xz.asc \
+
 	&& mkdir -p /usr/src/python \
 	&& tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
 	&& rm python.tar.xz \
@@ -247,16 +247,20 @@ ENV PYTHON_GET_PIP_SHA256 c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0
 RUN apt-get install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 
 RUN set -ex; \
-		# wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
-		# echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum --check --strict -; \
-		# \
-		# python get-pip.py \
-		# 	--disable-pip-version-check \
-		# 	--no-cache-dir \
-		# 	"pip==$PYTHON_PIP_VERSION" \
-		# 	"setuptools==$PYTHON_SETUPTOOLS_VERSION" \
+	\
+	# wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
+	# echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum --check --strict -; \
+	# \
+	# python get-pip.py \
+	# 	--disable-pip-version-check \
+	# 	--no-cache-dir \
+	# 	"pip==$PYTHON_PIP_VERSION" \
+	# 	"setuptools==$PYTHON_SETUPTOOLS_VERSION" \
+
 	curl -sSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
 	python get-pip.py \
+
+	
 	pip --version; \
 	\
 	find /usr/local -depth \
@@ -278,7 +282,7 @@ RUN set -ex; \
 
 # trying something basic
 ENV $name hughharford
-ENTRYPOINT ["/bin/bash", echo "Welcome, $name"]
+ENTRYPOINT ["/bin/echo", "Welcome, $name"]
 
 # use the container via: 
 #						docker run -it --entrypoint "/bin/bash" image_name:tag
