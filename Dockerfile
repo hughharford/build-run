@@ -134,7 +134,7 @@ RUN apt-get install -y \
 			# RUN mkdir tmp
 			RUN cd tmp 
 			RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
-			# RUN yes "yes" | bash Anaconda3-2021.11-Linux-x86_64.sh
+			RUN yes "yes" | bash Anaconda3-2021.11-Linux-x86_64.sh
 				# NOT NEEDED: RUN ( echo yes ; echo -e "\n" ) | bash Anaconda3-2021.11-Linux-x86_64.sh
 			RUN cd ~
 			# rmdir tmp 	# rmdir won't work as not empty!
