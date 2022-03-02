@@ -1,0 +1,75 @@
+﻿22 02 22 FixYOGA_installs
+# ***********************************************************
+
+# NOTES 
+# $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+# trying to copy file:
+#			/var/lib/apt/extended-states
+# See in this folder, but only has 457 x “Auto-Installed: 1” rather than 0 – so no manually installed
+
+# MANUAL INSTALL TO GET STARTED:
+# manually install to get the dockerfile etc
+
+# Some sort of browser to get dockerfile
+
+# snap 
+
+# docker
+RUN snap install docker
+
+
+
+# INSTALLS ALREADY PROVIDED
+
+# come with Ubuntu 20.04:
+
+# snap	git	ssh
+
+
+# INSTALLS NEEDED
+# $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+# chrome
+# zoom
+# libre office
+# slack
+
+# vs code
+# vs code extension manager (and extensions.txt)
+
+# python
+# venv
+# anaconda navigator
+# 
+# 
+
+
+
+# DOCKER FILE INPUT
+
+
+
+# LESS IMPORTANT
+
+# adobe pdf viewer
+
+
+# ??????????????????????????????
+# mysql
+# 
+# postgresql
+# pgadmin
+
+
+# SNAP *********************************
+# 
+# rpi-imager
+# spotify
+
+
+# UTILITIES
+# 
+# snap
+# 
