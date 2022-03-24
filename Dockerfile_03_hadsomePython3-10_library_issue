@@ -44,43 +44,25 @@ RUN apt-get install -y \
 		unzip \
 		curl \
 		wget \
-		virtualenv \
-		python3-pip
+		snap \
+		virtualenv \			
+			# https://docs.python.org/3/tutorial/venv.html
+		software-properties-common \
+		python3-pip 
 
-######   
-###### 
-#		INSTALL NOTES  
-######   
-######   
-#
-# ALREADY INSTALLED WITH UBUNTU_20.04
-#			Document viewer - for pdf 
-#			SNAP
-#			GIT	(fullname, Bird date punkt)
-#
-# NOT INCLUDED WITH UBUNTU_20.04
-#
-# so install manually once set up, or?
-#
-#		Spotify (old e, renewed lyric)
-#			RUN snap install spotify
-# 		VLC
-#			RUN apt-get install VLC
-#		Office365WebDesktop for linux (posco e, lyric and and)
-#			RUN snap install unofficial-webapp-office
-#		Slack (posco e, )
-#			RUN snap install slack --classic
-#		VS Code
-#			#### 	https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-18-04/
-#			sudo apt install gnupg2 software-properties-common apt-transport-https wget
-#			wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-#			sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-#			sudo apt update
-#			sudo apt install code
-#		Docker (hughharford			Bird date)
-#			RUN apt-get install -y docker.io docker-compose
-#				sudo snap install docker          # version 20.10.11, or
-#				sudo apt  install docker-compose  # version 1.25.0-1
+# FROM LE WAGONG: https://gto76.github.io/python-cheatsheet/
+RUN pip3 install loguru \
+	&& pip3 install bottle \
+	&& pip3 install beautifulsoup4 \
+	&& pip3 install requests \
+	&& pip3 install line_profiler memory_profiler \
+	&& pip3 install pycallgraph2
+	# loguru: logging
+	# bottle: web
+	# beautifulsoup4: webscraping
+	# requests: html testing
+	# line_profiler memory_profiler: profiling by line
+	# pycallgraph2: for graphically showing the bottlenecks
 
 #
 # Further useful:
@@ -92,57 +74,98 @@ RUN apt-get install -y \
 #
 #	NOTE how more complex get-pip.py with specific versions is sidestepped below
 
+######   
+# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+###### 
+#		INSTALL NOTES  
+######   
+# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+######   
+#
+# ALREADY INSTALLED WITH UBUNTU_20.04
+#			Document viewer - for pdf 
+#			SNAP
+#			GIT	(fullname, Bird date punkt)
 
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+# NOT INCLUDED WITH UBUNTU_20.04
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+# so install manually once set up, or?
+#
+#		Spotify (old e)
+# NOT WORKING: (unsure why, seemed to work ok in U_20.04 root)
+#			RUN snap install spotify
 
+# 		VLC
+#				REF: it's complicated, see: https://launchpad.net/ubuntu/+source/vlc
+#					=> manual installation for now
+#			RUN apt-get install VLC
+
+#		Office365WebDesktop for linux (posco)
+# NOT WORKING:
+#			RUN snap install unofficial-webapp-office
+
+#		Slack (posco, yetitool.com, quantconnect?)
+# NOT WORKING:
+#			RUN snap install slack --classic
+
+#		VS Code
+#			#### 	https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-18-04/
+			RUN apt-get install -y gnupg2 
+			# sudo apt-get install -y gnupg2
+				# software-properties-common \
+				# apt-transport-https \ 
+				# wget
+			RUN wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+			RUN add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+			RUN apt update
+			RUN apt install -y code
+
+#		Docker (hughharford			Bird date)
+			RUN apt-get install -y docker.io docker-compose
+			
+			# additional, not required?:
+			# RUN snap install docker          # version 20.10.11, or
+			# RUN apt  install docker-compose  # version 1.25.0-1
+
+# 		Anaconda ()
+#				# REF: 
+#					https://clouds.eos.ubc.ca/~phibl/docs/problem_solving/01-Orientation/01.05-Installing-Anaconda-on-Linux.html
+#				
+#			# STEPS:
+#    				Visit Anaconda.com/downloads
+#    				Select Linux
+#    				Copy the bash (.sh file) installer link
+#    				Use wget to download the bash installer
+#    				Run the bash script to install Anaconda3
+#    				source the .bash-rc file to add Anaconda to your PATH
+#    				Start the Python REPL
+
+#			# anaconda dependencies:
+#			# not needed RUN apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+#			
+			RUN cd ~
+			# RUN mkdir tmp
+			RUN cd tmp 
+			RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
+			RUN yes "yes" | bash Anaconda3-2021.11-Linux-x86_64.sh
+				# NOT NEEDED: RUN ( echo yes ; echo -e "\n" ) | bash Anaconda3-2021.11-Linux-x86_64.sh
+			RUN cd ~
+			# rmdir tmp 	# rmdir won't work as not empty!
+
+# 		Anaconda Navigator () NO NEED FOR ADDITIONAL INSTALLTION
+#				run the program via this command from an activated anaconda terminal:
+#					anaconda-navigator
+#				NOTE: will likely update version (at time of writing from 2.1.1 to 2.1.2)
 
 
 # was: RUN apt-get install docker.io -y
 RUN apt-get install -y docker.io docker-compose
 # LOGIN TO DOCKER: 			hughharford			Bird date
 
+# Adding User (tbc) to Docker group
+###################### details needed 
 
-#### LE WAGON INSTALLS ##### start #
-# REF                                https://gto76.github.io/python-cheatsheet/
-### TODO: Convert to requirements.txt
-
-RUN pip3 install pygame \
-	&& pip3 install PySimpleGUI \
-	# FROM 					REF/#logging
-	&& pip3 install loguru \ 
-	# for logging
-	&& pip3 install requests beautifulsoup4 \
-	# for web-scraping
-	&& pip3 install bottle \
-	# for web
-	&& pip3 install line_profiler memory_profiler \
-	# for profiling by line
-	&& pip3 install pycallgraph2 \
-	# for a PNG image of the call graph with highlighted bottlenecks (see example)
-	&& pip3 install pillow \
-	# for image
-	&& pip3 install pyttsx3 \
-	# for text to speech recognition
-	#													&& pip3 install simpleaudio \
-	# for synthesizer
-	&& pip3 install plotly kaleido \
-	# for plotly
-	&& pip3 install cython \
-	# for the Library that compiles Python code into C.
-	&& pip3 install tqdm \
-	# progress bar
-	&& pip3 install tabulate 
-	# can prints a CSV file as an ASCII table
-
-### TODO: Convert to requirements.txt
-#### LE WAGON INSTALLS ##### end #
-
-
-# # make some useful symlinks that are expected to exist
- RUN cd /usr/local/bin \
- 	&& ln -s idle3 idle \
- 	&& ln -s pydoc3 pydoc \
- 	&& ln -s python3 python \
- 	&& ln -s python3-config python-config
 
 # ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
 #### Not even sure what this is used for below?
@@ -164,17 +187,15 @@ RUN pip3 install pygame \
 ############# First, PYTHON 2.7 #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-ENV PYTHON_VERSION 2.7
-
-## got to be different for 2.7
-## Leave for now...
-
+# REF: 
+#		https://linuxconfig.org/install-python-2-on-ubuntu-20-04-focal-fossa-linux
+RUN apt install -y python2
 
 
 ############# Then, PYTHON 3.10.1 #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-ENV PYTHON_VERSION 3.10.0
+ENV PYTHON_VERSION 3.10.1
 
 RUN set -ex \
 	\
@@ -215,6 +236,14 @@ RUN set -ex \
 	\
 	&& python3 --version
 
+
+# make some useful symlinks that are expected to exist
+RUN cd /usr/local/bin \
+	&& ln -s idle3 idle \
+	&& ln -s pydoc3 pydoc \
+	&& ln -s python3 python \
+	&& ln -s python3-config python-config
+
 ############# @@@@@@@@@@@@@@@ #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 ############# @@@@@@@@@@@@@@@ #########################################################
@@ -234,15 +263,14 @@ ENV PYTHON_GET_PIP_SHA256 c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0
 RUN apt-get install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 
 RUN set -ex; \
-	\
-	# wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
-	# echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum --check --strict -; \
-	# \
-	# python get-pip.py \
-	# 	--disable-pip-version-check \
-	# 	--no-cache-dir \
-	# 	"pip==$PYTHON_PIP_VERSION" \
-	# 	"setuptools==$PYTHON_SETUPTOOLS_VERSION" \
+		# wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
+		# echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum --check --strict -; \
+		# \
+		# python get-pip.py \
+		# 	--disable-pip-version-check \
+		# 	--no-cache-dir \
+		# 	"pip==$PYTHON_PIP_VERSION" \
+		# 	"setuptools==$PYTHON_SETUPTOOLS_VERSION" \
 	curl -sSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
 	python get-pip.py \
 	pip --version; \
@@ -256,8 +284,19 @@ RUN set -ex; \
 	rm -f get-pip.py
 
 # HSTH fulfill from requirements.txt
-COPY /docs/build_run_requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# N/A in this case: 
+#					COPY /docs/requirements.txt requirements.txt
+#					RUN python3 -m pip install -r requirements.txt
 
 # example command to run CMD ["/usr/bin/firefox"]
-CMD ["/bin/bash"]
+# RUN apt-get update && apt-get install -y firefox
+# CMD ["/usr/bin/firefox"]
+
+# trying something basic
+ENV $name hughharford
+ENTRYPOINT ["/bin/bash", echo "Welcome, $name"]
+
+# use the container via: 
+#						docker run -it --entrypoint "/bin/bash" image_name:tag
+
+# sudo docker run -it --entrypoint "/bin/bash" fc3cc1baa653

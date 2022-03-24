@@ -101,6 +101,49 @@ RUN apt-get install -y docker.io docker-compose
 # LOGIN TO DOCKER: 			hughharford			Bird date
 
 
+#### LE WAGON INSTALLS ##### start #
+# REF                                https://gto76.github.io/python-cheatsheet/
+### TODO: Convert to requirements.txt
+
+RUN python3 pip3 install \
+	&& pygame \
+	&& PySimpleGUI \
+	# FROM 					REF/#logging
+	&& loguru \ 
+	# for logging
+	&& requests beautifulsoup4 \
+	# for web-scraping
+	&& bottle \
+	# for web
+	&& line_profiler memory_profiler \
+	# for profiling by line
+	&& pycallgraph2 \
+	# for a PNG image of the call graph with highlighted bottlenecks (see example)
+	&& pillow \
+	# for image
+	&& pyttsx3 \
+	# for text to speech recognition
+	&& simpleaudio \
+	# for synthesizer
+	&& plotly kaleido \
+	# for plotly
+	&& cython \
+	# for the Library that compiles Python code into C.
+	&& tqdm \
+	# progress bar
+	&& tabulate 
+	# can prints a CSV file as an ASCII table
+
+### TODO: Convert to requirements.txt
+#### LE WAGON INSTALLS ##### end #
+
+
+# # make some useful symlinks that are expected to exist
+ RUN cd /usr/local/bin \
+ 	&& ln -s idle3 idle \
+ 	&& ln -s pydoc3 pydoc \
+ 	&& ln -s python3 python \
+ 	&& ln -s python3-config python-config
 
 # ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
 #### Not even sure what this is used for below?
@@ -132,20 +175,17 @@ ENV PYTHON_VERSION 2.7
 ############# Then, PYTHON 3.10.1 #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-ENV PYTHON_VERSION 3.10.1
+ENV PYTHON_VERSION 3.10.0
 
 RUN set -ex \
 	\
 	&& wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
 	&& wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
-	
-	
 #	&& export GNUPGHOME="$(mktemp -d)" \
 #	&& gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$GPG_KEY" \
 #	&& gpg --batch --verify python.tar.xz.asc python.tar.xz \
 #	&& { command -v gpgconf > /dev/null && gpgconf --kill all || :; } \
 #	&& rm -rf "$GNUPGHOME" python.tar.xz.asc \
-
 	&& mkdir -p /usr/src/python \
 	&& tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
 	&& rm python.tar.xz \
@@ -177,12 +217,6 @@ RUN set -ex \
 	&& python3 --version
 
 
-# make some useful symlinks that are expected to exist
-RUN cd /usr/local/bin \
-	&& ln -s idle3 idle \
-	&& ln -s pydoc3 pydoc \
-	&& ln -s python3 python \
-	&& ln -s python3-config python-config
 
 ############# @@@@@@@@@@@@@@@ #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
@@ -229,9 +263,10 @@ RUN set -ex; \
 
 # HSTH fulfill from requirements.txt
 # N/A in this case: 
-#					COPY /docs/requirements.txt requirements.txt
-#					RUN python3 -m pip install -r requirements.txt
+#					
+COPY /docs/build_run_requirements.txt requirements.txt
+#					
+RUN python3 -m pip install -r requirements.txt
 
 # example command to run CMD ["/usr/bin/firefox"]
-RUN apt-get update && apt-get install -y firefox
-CMD ["/usr/bin/firefox"]
+CMD ["/bin/bash"]
