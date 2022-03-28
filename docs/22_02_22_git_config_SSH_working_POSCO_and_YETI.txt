@@ -19,7 +19,7 @@ git config --global --replace-all user.email "hugh.harford@poscoconsulting.com"
 
 
 # TO PUBLISH A NEW REPO:
-git remote set-url origin git@github.com:hughharford/condorgpcell.git
+git remote set-url add origin git@github.com:hughharford/condorgpcell.git
 
 adapt username and repo name, of course
 
@@ -28,6 +28,16 @@ adapt username and repo name, of course
 # git SSH COMMAND usage ____ for LINUX ___ 
 # for ___ Windows 10 ___ use GIT GUI to generate the SSH and then works nicely, once .pub added to github
 ###
+#
+#####
+#    CONFIRMING IF GIT AND SSH ARE SETUP AND WORKING
+#
+#       see: 	https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection
+#           RUN this to confirm ssh working. it doesn't do anything, but checks 
+                ssh -T git@github.com
+#           add to local .git/config sshCommand = ssh -i ~/.ssh/21_01_09
+#
+#
 #
 #
 ############# THIS IS WHAT WORKS TO SPECIFY A REPOSITORIES SSH KEY
