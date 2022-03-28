@@ -99,6 +99,11 @@ RUN apt-get install -y \
 #	NOTE how more complex get-pip.py with specific versions is sidestepped below
 
 
+# SSH NOTES
+#
+# 
+# see in git_config_SSH_working_POSCO_and_YETI.txt
+
 
 
 
