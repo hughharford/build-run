@@ -81,7 +81,13 @@ RUN apt-get install -y \
 #			RUN apt-get install -y docker.io docker-compose
 #				sudo snap install docker          # version 20.10.11, or
 #				sudo apt  install docker-compose  # version 1.25.0-1
-
+#
+#
+#		VNC Viewer
+#			RUN apt-get install vncviewer (DOESN'T WORK...)
+#				So far have to download and manually install, via the .deb and then use software install
+#				REF: 
+#					https://www.realvnc.com/en/connect/download/vnc/linux/
 #
 # Further useful:
 #
