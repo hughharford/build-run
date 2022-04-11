@@ -56,7 +56,7 @@ RUN apt-get install -y \
 # ALREADY INSTALLED WITH UBUNTU_20.04
 #			Document viewer - for pdf 
 #			SNAP
-#			GIT	(fullname, Bird date punkt)
+#			GIT	(fullname, Bird date punkt) - ??
 #
 # NOT INCLUDED WITH UBUNTU_20.04
 #
@@ -83,12 +83,22 @@ RUN apt-get install -y \
 #				sudo apt  install docker-compose  # version 1.25.0-1
 #
 #
+#		System profiler (hardinfo)
+#			RUN sudo apt install hardinfo
+#
 #		VNC Viewer
 #			RUN apt-get install vncviewer (DOESN'T WORK...)
 #				So far have to download and manually install, via the .deb and then use software install
 #				REF: 
 #					https://www.realvnc.com/en/connect/download/vnc/linux/
 #
+#
+#	##	Video Codecs:
+#			 		sudo apt install ffmpeg
+# 						Netflix will play with this installed
+#					maybe this too?:
+#							https://en.wikipedia.org/wiki/Ubuntu-restricted-extras
+#                 	  sudo apt install ubuntu-restricted-extras
 # Further useful:
 #
 #  FROM get-pip.py (see below and: https://github.com/pypa/get-pip)
@@ -101,10 +111,7 @@ RUN apt-get install -y \
 
 # SSH NOTES
 #
-# 
 # see in git_config_SSH_working_POSCO_and_YETI.txt
-
-
 
 
 # was: RUN apt-get install docker.io -y
@@ -269,6 +276,22 @@ RUN set -ex; \
 # HSTH fulfill from requirements.txt
 COPY /docs/build_run_requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
+
+# ###################################
+#		Anaconda Conda
+#		and
+#		Anaconda Navigator
+# ###################################
+
+# HSTH install Anaconda and Navigator
+# prerequisites: REF: https://docs.anaconda.com/anaconda/install/linux/
+RUN apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+
+# DOWNLOAD from:
+# https://www.anaconda.com/products/distribution#linux
+RUN bash ~/Downloads/Anaconda3-2020.02-Linux-x86_64.sh
+
+
 
 # example command to run CMD ["/usr/bin/firefox"]
 CMD ["/bin/bash"]

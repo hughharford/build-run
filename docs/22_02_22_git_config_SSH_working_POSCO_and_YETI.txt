@@ -35,7 +35,8 @@ adapt username and repo name, of course
 #       see: 	https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection
 #           RUN this to confirm ssh working. it doesn't do anything, but checks 
                 ssh -T git@github.com
-#           add to local .git/config sshCommand = ssh -i ~/.ssh/21_01_09
+#           add to local .git/config this line:
+				sshCommand = ssh -i ~/.ssh/21_01_09
 #
 #
 #
