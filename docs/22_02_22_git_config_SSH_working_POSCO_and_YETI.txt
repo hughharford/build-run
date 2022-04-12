@@ -24,19 +24,35 @@ git remote set-url add origin git@github.com:hughharford/condorgpcell.git
 adapt username and repo name, of course
 
 
+# TO GENERATE A NEW new NEW new NEW ssh key
+
+# REF: 
+	https://linuxhint.com/generate-ssh-key-ubuntu/
+	check first:
+		ls -l ~/.ssh/id_*.pub
+		or
+		ls -l ~/.ssh/*.pub
+	then create:
+		ssh-keygen -t rsa -b 4096 -C "hugh.harford@poscoconsulting.com"
+		or
+		ssh-keygen
+
+		the filename is needed etc
 
 # git SSH COMMAND usage ____ for LINUX ___ 
 # for ___ Windows 10 ___ use GIT GUI to generate the SSH and then works nicely, once .pub added to github
 ###
 #
 #####
-#    CONFIRMING IF GIT AND SSH ARE SETUP AND WORKING
+#    CONFIRMING IF GIT ANDCon SSH ARE SETUP AND WORKING
 #
 #       see: 	https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection
 #           RUN this to confirm ssh working. it doesn't do anything, but checks 
                 ssh -T git@github.com
 #           add to local .git/config this line:
 				sshCommand = ssh -i ~/.ssh/21_01_09
+				or
+				sshCommand = ssh -i ~/.ssh/22_04_12_ThinkPad
 #
 #
 #

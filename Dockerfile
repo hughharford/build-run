@@ -29,10 +29,10 @@ RUN apt-get update
 # extra dependencies (over what base already includes, was buildpack-deps, now ubuntu:20.04)
 # added HSTH: apt-utils
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		apt-utils \		
-		libbluetooth-dev \
-		tk-dev \
-		uuid-dev \					
+	apt-utils \		
+	libbluetooth-dev \
+	tk-dev \
+	uuid-dev \					
 	&& rm -rf /var/lib/apt/lists/*
 
 # HSTH: THEN INSTALL BASICS
@@ -41,11 +41,11 @@ RUN apt-get update && apt-get install -y apt-transport-https
 
 # HSTH: STEPS to install a few extras
 RUN apt-get install -y \
-		unzip \
-		curl \
-		wget \
-		virtualenv \
-		python3-pip
+	unzip \
+	curl \
+	wget \
+	virtualenv \
+	python3-pip
 
 ######   
 ###### 
@@ -56,7 +56,10 @@ RUN apt-get install -y \
 # ALREADY INSTALLED WITH UBUNTU_20.04
 #			Document viewer - for pdf 
 #			SNAP
-#			GIT	(fullname, Bird date punkt) - ??
+#			GIT	(fullname, Bird date punkt)
+#				NOT ALWAYS
+#				might need: 
+#						sudo apt  install gitsome
 #
 # NOT INCLUDED WITH UBUNTU_20.04
 #
@@ -91,29 +94,6 @@ RUN apt-get install -y \
 #				So far have to download and manually install, via the .deb and then use software install
 #				REF: 
 #					https://www.realvnc.com/en/connect/download/vnc/linux/
-#
-#
-#	##	Video Codecs:
-#			 		sudo apt install ffmpeg
-# 						Netflix will play with this installed
-#					maybe this too?:
-#							https://en.wikipedia.org/wiki/Ubuntu-restricted-extras
-#                 	  sudo apt install ubuntu-restricted-extras
-#
-#		VIA .DEB files
-#			.deb saved: 
-#	 		 		 	google-chrome-stable_current_amd64.deb
-#	 		 		 	teams_1.4.00.26453_amd64.deb
-#	 		 		 	zoom_amd64.deb
-#       NOTES ON THE DEB FILES ABOVE
-#			Zoom
-#	        	(Posco e, lyric)
-#		    	Likely to need to run:
-#					sudo apt --fix-broken install
-#						as Zoom .deb didn't seem to work nicely
-#
-#
-#
 #
 # Further useful:
 #
@@ -165,18 +145,18 @@ RUN pip3 install pygame \
 	&& pip3 install tqdm \
 	# progress bar
 	&& pip3 install tabulate 
-	# can prints a CSV file as an ASCII table
+# can prints a CSV file as an ASCII table
 
 ### TODO: Convert to requirements.txt
 #### LE WAGON INSTALLS ##### end #
 
 
 # # make some useful symlinks that are expected to exist
- RUN cd /usr/local/bin \
- 	&& ln -s idle3 idle \
- 	&& ln -s pydoc3 pydoc \
- 	&& ln -s python3 python \
- 	&& ln -s python3-config python-config
+RUN cd /usr/local/bin \
+	&& ln -s idle3 idle \
+	&& ln -s pydoc3 pydoc \
+	&& ln -s python3 python \
+	&& ln -s python3-config python-config
 
 # ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
 #### Not even sure what this is used for below?
@@ -214,11 +194,11 @@ RUN set -ex \
 	\
 	&& wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
 	&& wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
-#	&& export GNUPGHOME="$(mktemp -d)" \
-#	&& gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$GPG_KEY" \
-#	&& gpg --batch --verify python.tar.xz.asc python.tar.xz \
-#	&& { command -v gpgconf > /dev/null && gpgconf --kill all || :; } \
-#	&& rm -rf "$GNUPGHOME" python.tar.xz.asc \
+	#	&& export GNUPGHOME="$(mktemp -d)" \
+	#	&& gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$GPG_KEY" \
+	#	&& gpg --batch --verify python.tar.xz.asc python.tar.xz \
+	#	&& { command -v gpgconf > /dev/null && gpgconf --kill all || :; } \
+	#	&& rm -rf "$GNUPGHOME" python.tar.xz.asc \
 	&& mkdir -p /usr/src/python \
 	&& tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
 	&& rm python.tar.xz \
@@ -226,24 +206,24 @@ RUN set -ex \
 	&& cd /usr/src/python \
 	&& gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
 	&& ./configure \
-		--build="$gnuArch" \
-		--enable-loadable-sqlite-extensions \
-		--enable-optimizations \
-		--enable-option-checking=fatal \
-		--enable-shared \
-		--with-lto \
-		--with-system-expat \
-		--with-system-ffi \
-		--without-ensurepip \
+	--build="$gnuArch" \
+	--enable-loadable-sqlite-extensions \
+	--enable-optimizations \
+	--enable-option-checking=fatal \
+	--enable-shared \
+	--with-lto \
+	--with-system-expat \
+	--with-system-ffi \
+	--without-ensurepip \
 	&& make -j "$(nproc)" \
 	&& make install \
 	&& rm -rf /usr/src/python \
 	\
 	&& find /usr/local -depth \
-		\( \
-			\( -type d -a \( -name test -o -name tests -o -name idle_test \) \) \
-			-o \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name '*.a' \) \) \
-		\) -exec rm -rf '{}' + \
+	\( \
+	\( -type d -a \( -name test -o -name tests -o -name idle_test \) \) \
+	-o \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name '*.a' \) \) \
+	\) -exec rm -rf '{}' + \
 	\
 	&& ldconfig \
 	\
@@ -282,11 +262,11 @@ RUN set -ex; \
 	pip --version; \
 	\
 	find /usr/local -depth \
-		\( \
-			\( -type d -a \( -name test -o -name tests -o -name idle_test \) \) \
-			-o \
-			\( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
-		\) -exec rm -rf '{}' +; \
+	\( \
+	\( -type d -a \( -name test -o -name tests -o -name idle_test \) \) \
+	-o \
+	\( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+	\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
 # HSTH fulfill from requirements.txt
