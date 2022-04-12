@@ -63,6 +63,11 @@ RUN apt-get install -y \
 #
 # so install manually once set up, or?
 #
+# 		Mouse Utilities
+#			RUN add-apt-repository ppa:atareao/atareao
+#			RUN apt update
+#			RUN apt install -y touchpad-indicator
+
 #		Spotify (old e, renewed lyric)
 #			RUN snap install spotify
 # 		VLC
