@@ -58,8 +58,6 @@ RUN apt-get install -y \
 #			SNAP
 #			GIT	(fullname, Bird date punkt)
 #				NOT ALWAYS
-#				might need: 
-#						sudo apt  install gitsome
 #
 # NOT INCLUDED WITH UBUNTU_20.04
 #
@@ -68,7 +66,10 @@ RUN apt-get install -y \
 #		Spotify (old e, renewed lyric)
 #			RUN snap install spotify
 # 		VLC
-#			RUN apt-get install VLC
+#			RUN apt-get install vlc
+#			 --or:	sudo snap install vlc
+#		GIMP
+#			RUN sudo apt install gimp
 #		Office365WebDesktop for linux (posco e, lyric and and)
 #			RUN snap install unofficial-webapp-office
 #		Slack (posco e, )
