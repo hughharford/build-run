@@ -1,9 +1,26 @@
 #
-# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
+# NOTE:
+#   THIS DOCKERFILE IS(WAS) GENERATED VIA "update.sh"
 #		 ORIGINALLY MS VSCODE dockerfile for dev in container work
-# PLEASE DO NOT EDIT IT DIRECTLY.
 
-# NOTES ##  ##  ## see likely useful ref: 		
+
+####
+####
+#### HSTH NOTES:
+####
+####
+#
+# 22 04 24
+#       + Builds, runs python 3-8 as requested
+#       + Haven't checked out much other detail yet
+#
+#
+#
+#
+#
+
+
+# NOTES ##  ##  ## see likely useful ref:
 #										https://github.com/fcwu/docker-ubuntu-vnc-desktop
 #
 
@@ -29,10 +46,10 @@ RUN apt-get update
 # extra dependencies (over what base already includes, was buildpack-deps, now ubuntu:20.04)
 # added HSTH: apt-utils
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	apt-utils \		
+	apt-utils \
 	libbluetooth-dev \
 	tk-dev \
-	uuid-dev \					
+	uuid-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 # HSTH: THEN INSTALL BASICS
@@ -47,14 +64,15 @@ RUN apt-get install -y \
 	virtualenv \
 	python3-pip
 
-######   
-###### 
-#		INSTALL NOTES  
-######   
-######   
+######
+######
+#		ADDITIONAL INSTALL NOTES
+#           Mostly for resetting a working GUI machine...
+######
+######
 #
 # ALREADY INSTALLED WITH UBUNTU_20.04
-#			Document viewer - for pdf 
+#			Document viewer - for pdf
 #			SNAP
 #			GIT	(fullname, Bird date punkt)
 #				NOT ALWAYS
@@ -98,7 +116,7 @@ RUN apt-get install -y \
 #		VNC Viewer
 #			RUN apt-get install vncviewer (DOESN'T WORK...)
 #				So far have to download and manually install, via the .deb and then use software install
-#				REF: 
+#				REF:
 #					https://www.realvnc.com/en/connect/download/vnc/linux/
 #
 # Further useful:
@@ -121,14 +139,14 @@ RUN apt-get install -y docker.io docker-compose
 # LOGIN TO DOCKER: 			hughharford			Bird date
 
 
-#### LE WAGON INSTALLS ##### start #
+#### LE WAGON PREP INSTALLS ##### start #
 # REF                                https://gto76.github.io/python-cheatsheet/
 ### TODO: Convert to requirements.txt
 
 RUN pip3 install pygame \
 	&& pip3 install PySimpleGUI \
 	# FROM 					REF/#logging
-	&& pip3 install loguru \ 
+	&& pip3 install loguru \
 	# for logging
 	&& pip3 install requests beautifulsoup4 \
 	# for web-scraping
@@ -150,11 +168,17 @@ RUN pip3 install pygame \
 	# for the Library that compiles Python code into C.
 	&& pip3 install tqdm \
 	# progress bar
-	&& pip3 install tabulate 
+	&& pip3 install tabulate
 # can prints a CSV file as an ASCII table
 
 ### TODO: Convert to requirements.txt
 #### LE WAGON INSTALLS ##### end #
+
+#### LE WAGON INSTALLS ##### B___e___G___i___N #
+# _______________ Once LWB going 1 week:
+# TODO: Get in the LW pipenv, zsh etc
+
+#### LE WAGON INSTALLS ##### E___n___D #
 
 
 # # make some useful symlinks that are expected to exist
@@ -191,10 +215,10 @@ ENV PYTHON_VERSION 2.7
 
 
 
-############# Then, PYTHON 3.10.1 #########################################################
+############# Then, PYTHON 3.8.0 was 3.10.1 #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-ENV PYTHON_VERSION 3.10.0
+ENV PYTHON_VERSION 3.8.0
 
 RUN set -ex \
 	\
@@ -243,7 +267,7 @@ RUN set -ex \
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 21.0.0
+ENV PYTHON_PIP_VERSION 22.0.4
 # https://github.com/docker-library/python/issues/365
 ENV PYTHON_SETUPTOOLS_VERSION 57.0.0
 # https://github.com/pypa/get-pip
@@ -283,16 +307,22 @@ RUN pip3 install -r requirements.txt
 #		Anaconda Conda
 #		and
 #		Anaconda Navigator
+##
+##
+# _________________ don't need Anaconda...?? LWB
+##
+##
 # ###################################
 
 # HSTH install Anaconda and Navigator
 # prerequisites: REF: https://docs.anaconda.com/anaconda/install/linux/
-RUN apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+#
+# RUN apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
 
 # DOWNLOAD from:
 # https://www.anaconda.com/products/distribution#linux
-RUN bash ~/Downloads/Anaconda3-2020.02-Linux-x86_64.sh
-
+#
+# RUN bash ~/Downloads/Anaconda3-2020.02-Linux-x86_64.sh
 
 
 # example command to run CMD ["/usr/bin/firefox"]
