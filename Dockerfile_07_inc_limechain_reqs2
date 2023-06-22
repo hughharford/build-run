@@ -163,7 +163,11 @@ RUN apt-get install -y docker.io docker-compose
 #
 ##### ALSO other Ubuntu software probably worth noting (likely incomplete)
 #
-#
+#     System profiler
+#     OBS studio (useful video capture)
+#         RUN add-apt-repository ppa:obsproject/obs-studio \
+#              && apt update \
+#              && apt install obs-studio
 #
 #
 #
