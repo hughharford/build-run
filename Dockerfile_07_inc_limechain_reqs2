@@ -138,6 +138,418 @@ RUN apt-get install -y \
 RUN apt-get install -y docker.io docker-compose
 # LOGIN TO DOCKER: 			hughharford			Bird date
 
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# SECTION BREAK
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##
+##
+## June 2023 reset  NOTES
+##
+##       HIDDEN FILES, SYSTEM FILES, ETC
+##
+##   .pyenv  all python environments likely will need rebuilding
+##   .ssh    goes in the home/ folder
+##           ssh keys will need resetting
+##   .gitconfig (.gitconfig.backup)
+##
+##    All sorts of others established in "Key other"
+#
+#
+##### ALSO other Ubuntu software probably worth noting (likely incomplete)
+#
+#
+#
+#
+#
+###### PIP FREEZE 23 06 22
+##          full copy & paste. not all needed, had conflicts etc
+##          worth a look through...
+
+# absl-py==1.1.0
+# aiobotocore==2.3.2
+# aiohttp==3.8.1
+# aioitertools==0.8.0
+# aiosignal==1.2.0
+# alembic==1.4.1
+# altair==4.2.0
+# anyio==3.4.0
+# argcomplete==1.10.3
+# argon2-cffi==21.3.0
+# argon2-cffi-bindings==21.2.0
+# asgiref==3.4.1
+# astroid==2.7.3
+# astunparse==1.6.3
+# async-timeout==4.0.2
+# attrs==21.4.0
+# autopep8==1.6.0
+# azure-core==1.26.1
+# azure-cosmos==4.3.0
+# Babel==2.9.1
+# backcall==0.2.0
+# backports.zoneinfo==0.2.1
+# base58==2.1.1
+# beautifulsoup4==4.8.2
+# black==21.12b0
+# bleach==4.1.0
+# blinker==1.4
+# botocore==1.24.21
+# branca==0.4.2
+# cachetools==4.2.4
+# category-encoders==2.3.0
+# certifi==2021.10.8
+# cffi==1.15.0
+# chardet==3.0.4
+# charset-normalizer==2.0.10
+# clang==5.0
+# click==8.0.4
+# click-plugins==1.1.1
+# cligj==0.7.2
+# cloudpickle==2.0.0
+# clr-loader==0.2.4
+# colorama==0.4.4
+# commonmark==0.9.1
+# compressed-rtf==1.0.6
+# contourpy==1.0.5
+# coverage==6.2
+# cryptography==37.0.2
+# cycler==0.11.0
+# Cython==0.29.26
+# cytoolz==0.12.1
+# dask==2021.12.0
+# databricks-cli==0.16.2
+# deap==1.3.1
+# debugpy==1.5.1
+# decorator==5.1.0
+# decouple==0.0.7
+# defusedxml==0.7.1
+# dependency-injector==4.39.1
+# dill==0.3.4
+# docker==6.0.0
+# docutils==0.18.1
+# docx2python==2.0.4
+# docx2txt==0.8
+# e==1.4.5
+# ebcdic==1.1.1
+# ecdsa==0.18.0
+# entrypoints==0.3
+# eth-hash==0.5.2
+# eth-keys==0.4.0
+# eth-typing==3.4.0
+# eth-utils==2.1.1
+# evdev==1.5.0
+# extract-msg==0.28.7
+# fastapi==0.87.0
+# file-read-backwards==2.0.0
+# Fiona==1.8.21
+# flake8==4.0.1
+# Flask==2.0.2
+# Flask-Cors==3.0.10
+# flatbuffers==1.12
+# folium==0.12.1.post1
+# fonttools==4.28.5
+# frozenlist==1.2.0
+# fsspec==2022.5.0
+# future==0.18.2
+# gast==0.4.0
+# gcsfs==2022.5.0
+# gensim==4.1.2
+# geopandas==0.10.2
+# git-lfs==1.6
+# gitdb==4.0.9
+# GitPython==3.1.24
+# glob2==0.7
+# google-api-core==2.3.2
+# google-auth==1.35.0
+# google-auth-oauthlib==0.4.6
+# google-cloud-bigquery==2.31.0
+# google-cloud-bigquery-storage==2.10.1
+# google-cloud-core==2.3.0
+# google-cloud-storage==2.3.0
+# google-crc32c==1.3.0
+# google-pasta==0.2.0
+# google-resumable-media==2.3.3
+# google-trans-new==1.1.9
+# googleapis-common-protos==1.54.0
+# googlemaps==4.6.0
+# greenlet==1.1.2
+# grpcio==1.43.0
+# grpcio-status==1.43.0
+# gunicorn==20.1.0
+# h11==0.12.0
+# h5py==3.1.0
+# htmlmin==0.1.12
+# idna==3.3
+# ImageHash==4.2.1
+# imageio==2.13.5
+# IMAPClient==2.1.0
+# imbalanced-learn==0.8.1
+# imblearn==0.0
+# importlib-metadata==4.10.0
+# importlib-resources==5.4.0
+# iniconfig==1.1.1
+# interchange==2021.0.4
+# ipdb==0.13.9
+# ipykernel==6.6.1
+# ipympl==0.8.5
+# ipython==7.31.0
+# ipython-genutils==0.2.0
+# ipywidgets==7.6.5
+# isort==5.10.1
+# itsdangerous==2.0.1
+# jedi==0.18.1
+# jeepney==0.8.0
+# Jinja2==3.0.3
+# jmespath==0.10.0
+# joblib==1.0.1
+# json5==0.9.8
+# jsonschema==4.3.3
+# jupyter==1.0.0
+# jupyter-client==7.1.0
+# jupyter-console==6.4.0
+# jupyter-contrib-core==0.3.3
+# jupyter-contrib-nbextensions==0.5.1
+# jupyter-core==4.9.1
+# jupyter-highlight-selected-word==0.2.0
+# jupyter-latex-envs==1.4.6
+# jupyter-nbextensions-configurator==0.4.1
+# jupyter-resource-usage==0.6.1
+# jupyter-server==1.13.1
+# jupyter-server-mathjax==0.2.3
+# jupyterlab==3.2.5
+# jupyterlab-execute-time==2.1.0
+# jupyterlab-pygments==0.1.2
+# jupyterlab-server==2.10.2
+# jupyterlab-widgets==1.0.2
+# kaggle==1.5.12
+# keras==2.9.0
+# Keras-Preprocessing==1.1.2
+# keyring==23.5.1
+# kiwisolver==1.3.2
+# lazy-object-proxy==1.7.1
+# lean==1.0.117
+# libclang==14.0.1
+# libcst==0.3.23
+# locket==0.2.1
+# lwb-smr @ file:///home/hsth/code/hughharford/lwb_smr
+# -e git+ssh://git@github.com/hughharford/lwb_smr.git@fc3d47508262c647288245af5eedafd4cc444403#egg=lwb_solarmyroof
+# lxml==4.9.1
+# Mako==1.1.6
+# Markdown==3.3.6
+# MarkupSafe==2.0.1
+# maskpass==0.3.6
+# matplotlib==3.6.1
+# matplotlib-inline==0.1.3
+# mccabe==0.6.1
+# memoized-property==1.0.3
+# missingno==0.5.0
+# mistune==0.8.4
+# mlflow==1.22.0
+# -e git+ssh://git@github.com/hughharford/mlproject.git@6594a52bc5cbd77d0def0ca841e3afe52eb3514c#egg=mlproject
+# monotonic==1.6
+# more-itertools==9.1.0
+# multidict==5.2.0
+# multimethod==1.6
+# munch==2.5.0
+# mypy-extensions==0.4.3
+# mysql-connector-python==8.0.29
+# nbclassic==0.3.4
+# nbclient==0.5.9
+# nbconvert==6.4.0
+# nbdime==3.1.1
+# nbformat==5.1.3
+# nbresult==0.0.4
+# neo4j==5.0.0a2
+# neo4j-driver==5.3.0
+# nest-asyncio==1.5.4
+# networkx==2.6.3
+# nltk==3.6.7
+# notebook==6.4.6
+# numpy==1.22.4
+# oauthlib==3.1.1
+# olefile==0.46
+# opencv-python==4.6.0.66
+# opencv-python-headless==4.6.0.66
+# opt-einsum==3.3.0
+# osmium==3.3.0
+# packaging==21.3
+# packgenlite==1.1.3
+# pandas==1.5.0
+# pandas-gbq==0.16.0
+# pandas-profiling==3.1.0
+# pandocfilters==1.5.0
+# pansi==2020.7.3
+# parse==1.19.0
+# parse-type==0.6.0
+# parso==0.8.3
+# partd==1.2.0
+# pathspec==0.9.0
+# patsy==0.5.2
+# pdfminer.six==20191110
+# pexpect==4.8.0
+# -e git+ssh://git@github.com/hughharford/ph17_doc_sort.git@559695aff61c74af295d3242d0ab422355caa4f2#egg=ph17_doc_sort
+# phik==0.12.0
+# pickleshare==0.7.5
+# Pillow==9.3.0
+# pkginfo==1.8.2
+# platformdirs==2.4.1
+# plotly==5.5.0
+# pluggy==1.0.0
+# pmdarima==1.8.4
+# prometheus-client==0.12.0
+# prometheus-flask-exporter==0.18.7
+# promise==2.3
+# prompt-toolkit==3.0.24
+# proto-plus==1.19.8
+# protobuf==3.19.1
+# psutil==5.9.0
+# ptyprocess==0.7.0
+# py==1.11.0
+# py-bip39-bindings==0.1.11
+# py-ed25519-zebra-bindings==1.0.1
+# py-sr25519-bindings==0.2.0
+# pyarrow==6.0.1
+# pyasn1==0.4.8
+# pyasn1-modules==0.2.8
+# pycodestyle==2.8.0
+# pycparser==2.21
+# pycryptodome==3.16.0
+# pydantic==1.8.2
+# pydata-google-auth==1.3.0
+# pyDataverse==0.3.1
+# pydeck==0.7.1
+# pyflakes==2.4.0
+# pygeohash==1.2.0
+# Pygments==2.11.2
+# pylint==2.10.2
+# Pympler==1.0.1
+# PyNaCl==1.5.0
+# pynput==1.7.6
+# pyparsing==3.0.6
+# pyproj==3.3.1
+# pyrsistent==0.18.0
+# pyshortcuts==1.8.2
+# pytest==6.2.5
+# pytest-bdd==5.0.0
+# python-certifi-win32==1.6.1
+# python-dateutil==2.8.2
+# python-decouple==3.6
+# python-dotenv==0.20.0
+# python-editor==1.0.4
+# python-gitlab==3.0.0
+# python-pptx==0.6.21
+# python-slugify==5.0.2
+# python-xlib==0.31
+# pytz==2021.3
+# pytz-deprecation-shim==0.1.0.post0
+# PyWavelets==1.2.0
+# PyYAML==6.0
+# pyzmq==22.3.0
+# qtconsole==5.2.2
+# QtPy==2.0.0
+# quantconnect-stubs==14689
+# querystring-parser==1.2.4
+# readme-renderer==35.0
+# regex==2021.11.10
+# requests==2.27.1
+# requests-oauthlib==1.3.0
+# requests-toolbelt==0.9.1
+# rfc3986==2.0.0
+# rich==12.6.0
+# rsa==4.8
+# s3fs==2022.5.0
+# scalecodec==1.2.5
+# scikit-image==0.19.1
+# scikit-learn==1.1.1
+# scipy==1.7.3
+# seaborn==0.11.2
+# SecretStorage==3.3.2
+# semver==2.13.0
+# Send2Trash==1.8.0
+# setuptools-scm==6.3.2
+# Shapely==1.8.2
+# six==1.16.0
+# smart-open==5.2.1
+# smmap==5.0.0
+# -e git+ssh://git@github.com/hughharford/smr.git@c444257b7562ce03cf6150d9d0af26b698baf390#egg=smr
+# sniffio==1.2.0
+# sortedcontainers==2.4.0
+# soupsieve==2.3.1
+# SpeechRecognition==3.8.1
+# SQLAlchemy==1.4.29
+# sqlclient==21.4.24
+# sqlparse==0.4.2
+# starlette==0.21.0
+# statsmodels==0.13.1
+# stopit==1.1.2
+# streamlit==1.10.0
+# streamlit-folium==0.6.13
+# streamlit-option-menu==0.3.2
+# substrate-interface==1.7.2
+# tabulate==0.8.9
+# tangled-up-in-unicode==0.1.0
+# tenacity==8.0.1
+# tensorboard==2.9.1
+# tensorboard-data-server==0.6.1
+# tensorboard-plugin-wit==1.8.1
+# tensorflow==2.9.1
+# tensorflow-addons==0.17.0
+# tensorflow-datasets==4.4.0
+# tensorflow-estimator==2.9.0
+# tensorflow-gpu==2.9.1
+# tensorflow-io==0.26.0
+# tensorflow-io-gcs-filesystem==0.26.0
+# tensorflow-metadata==1.5.0
+# termcolor==1.1.0
+# terminado==0.12.1
+# test-package @ git+ssh://git@github.com/lorcanrae/test_package@f7c2e1ce6de4421d2ee2f40197ebc058d8f95226
+# testpath==0.5.0
+# text-unidecode==1.3
+# textract==1.6.5
+# threadpoolctl==3.0.0
+# tifffile==2021.11.2
+# toml==0.10.2
+# tomli==1.2.3
+# toolz==0.11.2
+# tornado==6.1
+# TPOT==0.11.7
+# tqdm==4.62.3
+# traitlets==5.1.1
+# twine==4.0.0
+# typeguard==2.13.3
+# typing-inspect==0.7.1
+# typing_extensions==4.4.0
+# tzdata==2022.1
+# tzlocal==4.2
+# update-checker==0.18.0
+# urllib3==1.26.7
+# -e git+ssh://git@github.com/hughharford/util_funcs.git@9536174670d9b06893006ea6fa65aeb94a6a6361#egg=util_funcs
+# uvicorn==0.20.0
+# validators==0.19.0
+# visions==0.7.4
+# Wand==0.6.10
+# watchdog==2.1.8
+# wcwidth==0.2.5
+# webencodings==0.5.1
+# websocket-client==1.2.3
+# Werkzeug==2.0.2
+# widgetsnbextension==3.5.2
+# wrapt==1.14.1
+# xgboost==1.5.1
+# xlrd==1.2.0
+# XlsxWriter==3.0.2
+# xxhash==3.2.0
+# yapf==0.32.0
+# yarl==1.7.2
+# zipp==3.7.0
+
+
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
