@@ -147,10 +147,10 @@ sudo apt-get update
 # install latest Docker
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 # check with:
-# sudo docker run hello-world
+sudo docker run hello-world
 
 # allow non-priviledged users (not always recommended)
-# sudo groupadd docker 
-# sudo usermod -aG docker $USER
-# newgrp docker  # gets groups re-initialised and working
+sudo groupadd docker 
+sudo usermod -aG docker $USER
+newgrp docker  # gets groups re-initialised and working
 
