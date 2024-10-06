@@ -208,7 +208,7 @@ RUN cd /usr/local/bin \
 ############# First, PYTHON 2.7 #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-ENV PYTHON_VERSION 2.7
+ENV PYTHON_VERSION_2 2.7
 
 ## got to be different for 2.7
 ## Leave for now...
@@ -218,7 +218,7 @@ ENV PYTHON_VERSION 2.7
 ############# Then, PYTHON 3.8.0 was 3.10.1 #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-ENV PYTHON_VERSION 3.8.0
+ENV PYTHON_VERSION 3.10.0
 
 RUN set -ex \
 	\
@@ -299,9 +299,14 @@ RUN set -ex; \
 	\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
-# HSTH fulfill from requirements.txt
+# HSTH fulfill from requirements.txt - remove OLD
 COPY /docs/build_run_requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# RUN pip3 install -r requirements.txt
+
+RUN pip3 install poetry; \
+  poetry install $(cat requirements.txt)
+
+
 
 # ###################################
 #		Anaconda Conda
