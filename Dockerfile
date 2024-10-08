@@ -61,7 +61,6 @@ RUN apt-get install -y \
 	unzip \
 	curl \
 	wget \
-	virtualenv \
 	python3-pip
 
 ######
@@ -300,11 +299,16 @@ RUN set -ex; \
 	rm -f get-pip.py
 
 # HSTH fulfill from requirements.txt - remove OLD
-COPY /docs/build_run_requirements.txt requirements.txt
 # RUN pip3 install -r requirements.txt
 
-RUN pip3 install poetry; \
-  poetry install $(cat requirements.txt)
+RUN pip3 install poetry
+RUN poetry new docker_env
+WORKDIR docker_env
+COPY /docs/build_run_requirements.txt requirements.txt
+
+RUN virtualenv --version
+
+RUN poetry add $(cat requirements.txt)
 
 
 
