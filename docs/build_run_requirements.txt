@@ -1,4 +1,12 @@
-numpy
+
+PySimpleGUI
+loguru
+line_profiler
+memory_profiler
+pycallgraph2
+cython
+tqdm
 pandas
 matplotlib
-'scikit-learn@*'
+scikit-learn
+pygame

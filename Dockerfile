@@ -1,30 +1,15 @@
-#
 # NOTE:
 #   THIS DOCKERFILE IS(WAS) GENERATED VIA "update.sh"
 #		 ORIGINALLY MS VSCODE dockerfile for dev in container work
-
-
-####
 ####
 #### HSTH NOTES:
-####
-####
-#
-# 22 04 24
-#       + Builds, runs python 3-8 as requested
-#       + Haven't checked out much other detail yet
-#
-#
-#
-#
-#
+  #
+  # 24 10 09:   Builds fine all the way
 
+  # SSH NOTES
+  # # see in git_config_SSH_working_POSCO_and_YETI.txt
 
-# NOTES ##  ##  ## see likely useful ref:
-#										https://github.com/fcwu/docker-ubuntu-vnc-desktop
-#
-
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
@@ -40,11 +25,11 @@ ENV TERM=xterm-256color
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# HSTH: ALWAYS RUN THIS FIRST:
+# always:
 RUN apt-get update
 
-# extra dependencies (over what base already includes, was buildpack-deps, now ubuntu:20.04)
-# added HSTH: apt-utils
+# extra dependencies
+# (over what base already includes, was buildpack-deps, now ubuntu:20.04)
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	apt-utils \
 	libbluetooth-dev \
@@ -52,133 +37,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	uuid-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
-# HSTH: THEN INSTALL BASICS
-# standard issue update && ...
+# HSTH standard issue:
 RUN apt-get update && apt-get install -y apt-transport-https
 
-# HSTH: STEPS to install a few extras
 RUN apt-get install -y \
 	unzip \
 	curl \
 	wget \
 	python3-pip
-
-######
-######
-#		ADDITIONAL INSTALL NOTES
-#           Mostly for resetting a working GUI machine...
-######
-######
-#
-# ALREADY INSTALLED WITH UBUNTU_20.04
-#			Document viewer - for pdf
-#			SNAP
-#			GIT	(fullname, Bird date punkt)
-#				NOT ALWAYS
-#
-# NOT INCLUDED WITH UBUNTU_20.04
-#
-# so install manually once set up, or?
-#
-# 		Mouse Utilities
-#			RUN add-apt-repository ppa:atareao/atareao
-#			RUN apt update
-#			RUN apt install -y touchpad-indicator
-
-#		Spotify (old e, renewed lyric)
-#			RUN snap install spotify
-# 		VLC
-#			RUN apt-get install vlc
-#			 --or:	sudo snap install vlc
-#		GIMP
-#			RUN sudo apt install gimp
-#		Office365WebDesktop for linux (posco e, lyric and and)
-#			RUN snap install unofficial-webapp-office
-#		Slack (posco e, )
-#			RUN snap install slack --classic
-#		VS Code
-#			#### 	https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-18-04/
-#			sudo apt install gnupg2 software-properties-common apt-transport-https wget
-#			wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-#			sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-#			sudo apt update
-#			sudo apt install code
-#		Docker (hughharford			Bird date)
-#			RUN apt-get install -y docker.io docker-compose
-#				sudo snap install docker          # version 20.10.11, or
-#				sudo apt  install docker-compose  # version 1.25.0-1
-#
-#
-#		System profiler (hardinfo)
-#			RUN sudo apt install hardinfo
-#
-#		VNC Viewer
-#			RUN apt-get install vncviewer (DOESN'T WORK...)
-#				So far have to download and manually install, via the .deb and then use software install
-#				REF:
-#					https://www.realvnc.com/en/connect/download/vnc/linux/
-#
-# Further useful:
-#
-#  FROM get-pip.py (see below and: https://github.com/pypa/get-pip)
-#		wheel
-#		setuptools
-#		pip
-#
-#	NOTE how more complex get-pip.py with specific versions is sidestepped below
-
-
-# SSH NOTES
-#
-# see in git_config_SSH_working_POSCO_and_YETI.txt
-
-
-# was: RUN apt-get install docker.io -y
-RUN apt-get install -y docker.io docker-compose
-# LOGIN TO DOCKER: 			hughharford			Bird date
-
-
-#### LE WAGON PREP INSTALLS ##### start #
-# REF                                https://gto76.github.io/python-cheatsheet/
-### TODO: Convert to requirements.txt
-
-RUN pip3 install pygame \
-	&& pip3 install PySimpleGUI \
-	# FROM 					REF/#logging
-	&& pip3 install loguru \
-	# for logging
-	&& pip3 install requests beautifulsoup4 \
-	# for web-scraping
-	&& pip3 install bottle \
-	# for web
-	&& pip3 install line_profiler memory_profiler \
-	# for profiling by line
-	&& pip3 install pycallgraph2 \
-	# for a PNG image of the call graph with highlighted bottlenecks (see example)
-	&& pip3 install pillow \
-	# for image
-	&& pip3 install pyttsx3 \
-	# for text to speech recognition
-	#													&& pip3 install simpleaudio \
-	# for synthesizer
-	&& pip3 install plotly kaleido \
-	# for plotly
-	&& pip3 install cython \
-	# for the Library that compiles Python code into C.
-	&& pip3 install tqdm \
-	# progress bar
-	&& pip3 install tabulate
-# can prints a CSV file as an ASCII table
-
-### TODO: Convert to requirements.txt
-#### LE WAGON INSTALLS ##### end #
-
-#### LE WAGON INSTALLS ##### B___e___G___i___N #
-# _______________ Once LWB going 1 week:
-# TODO: Get in the LW pipenv, zsh etc
-
-#### LE WAGON INSTALLS ##### E___n___D #
-
 
 # # make some useful symlinks that are expected to exist
 RUN cd /usr/local/bin \
@@ -187,34 +53,10 @@ RUN cd /usr/local/bin \
 	&& ln -s python3 python \
 	&& ln -s python3-config python-config
 
-# ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
-#### Not even sure what this is used for below?
-#### Trying without...
-#### Suspect this GPG key usage is a security measure, to avoid cyber threats. see 'gpg --batch verify python.tar.xz.asc python.tar.xz'
-#### See: https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages
-
-
-
 ############# PYTHON VERSIONS #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
-############# @@@@@@@@@@@@@@@ #########################################################
-# ''''''''''''''' ############################# '''''''''''''''''' ####################
-############# @@@@@@@@@@@@@@@ #########################################################
-# ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-
-
-############# First, PYTHON 2.7 #########################################################
-# ''''''''''''''' ############################# '''''''''''''''''' ####################
-
-ENV PYTHON_VERSION_2 2.7
-
-## got to be different for 2.7
-## Leave for now...
-
-
-
-############# Then, PYTHON 3.8.0 was 3.10.1 #########################################################
+############# Then, PYTHON was 3.8.0 now 3.10.1 #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
 ENV PYTHON_VERSION 3.10.0
@@ -258,23 +100,28 @@ RUN set -ex \
 	\
 	&& python3 --version
 
-############# @@@@@@@@@@@@@@@ #########################################################
-# ''''''''''''''' ############################# '''''''''''''''''' ####################
-############# @@@@@@@@@@@@@@@ #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 ############# PYTHON VERSIONS #########################################################
 # ''''''''''''''' ############################# '''''''''''''''''' ####################
 
-# if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 22.0.4
+# if this is called "PIP_VERSION", pip explodes with
+#           "ValueError: invalid truth value '<VERSION>'"
+ENV PYTHON_PIP_VERSION 24.0.4
 # https://github.com/docker-library/python/issues/365
 ENV PYTHON_SETUPTOOLS_VERSION 57.0.0
 # https://github.com/pypa/get-pip
 ENV PYTHON_GET_PIP_URL https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py
 ENV PYTHON_GET_PIP_SHA256 c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309
 
-# HSTH additional to deal with: WARNING: pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
-RUN apt-get install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+RUN apt-get install -y libncursesw5-dev \
+  libssl-dev \
+  tk-dev \
+  libgdbm-dev \
+  libc6-dev \
+  libbz2-dev \
+  libsqlite3-dev
+  # this FAILS
+# RUN apt-get install -y libreadline-gplv2-dev
 
 RUN set -ex; \
 	\
@@ -298,15 +145,12 @@ RUN set -ex; \
 	\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 
-# HSTH fulfill from requirements.txt - remove OLD
-# RUN pip3 install -r requirements.txt
+# RUN pip3 install poetry __ this FAILS
+RUN apt install python3-poetry -y
 
-RUN pip3 install poetry
 RUN poetry new docker_env
-WORKDIR docker_env
+WORKDIR /docker_env
 COPY /docs/build_run_requirements.txt requirements.txt
-
-RUN virtualenv --version
 
 RUN poetry add $(cat requirements.txt)
 
