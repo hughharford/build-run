@@ -1,0 +1,62 @@
+## WIFI connnections
+#########################################################################################
+
+networkctl status # shows networking status
+
+
+# nmcli (network-manager)
+nmcli d wifi list # shows wifi connnections
+ifconfig          # shows iterfaces, will list ID of wifi adaptor
+
+iwlist
+  sudo iwlist scan   # shows all wifi
+
+## command line programs to install
+
+sudo apt install -y:
+  network-manager         # for nmtui - useful
+  network-manager-gnome   # for nm-applet
+  ifconfig          # network interface
+  iwconfig          # wireless interface
+  wireless-tools
+
+
+# PROGRESS
+
+so far networkctl status shows connected in the house
+but cannot otherwise show how connected with wifi
+
+
+# TRY
+
+nmtui        # simple GUI for networking
+    # useful but:
+        device enp3s0 has no carrier
+        ...
+
+
+# https://unix.stackexchange.com/questions/283722/how-to-connect-to-wifi-from-command-line
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+# this worked
+# wpa_applicant came installed with Ubuntu Server
+
+# create etc/wpa_applicant/wpa_applicant.conf
+# containing:
+
+network={
+         ssid="wifi_name"
+         psk="wifi_key"
+}
+
+# then:
+#     where wifi device is:
+#                       wlp2s0
+
+sudo wpa_applicant -B -i wlp2s0 -c /etc/wpa_applicant/wpa_applicant.conf -Bnl80221,wext
+
+# the above works, now can switch to and from automatically based on if the
+# mobile hotspot is on.
+
+
+# this didn't work, reports not finding the SSID name...
+nmcli d wifi connect Your_SSID password Your_Psswd_here ifname Your_interface
