@@ -1,58 +1,65 @@
 # following data-setup from the awesome le wagon, and a few extras, noted under # included:
 # does exclude some steps, like Chrome, VS Code liveshare etc
 
+
+# adjustments here:
 PYTHON_VERSION=3.12.6
+sudo apt install zsh -y
 
-# vs code
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
-sudo apt update
-sudo apt install -y code
+# NOTE:
 
-# vs code extensions
-code --install-extension ms-vscode.sublime-keybindings
-code --install-extension emmanuelbeziat.vscode-great-icons
-code --install-extension MS-vsliveshare.vsliveshare
-code --install-extension ms-python.python
-code --install-extension KevinRose.vsc-python-indent
-code --install-extension ms-python.vscode-pylance
-code --install-extension ms-toolsai.jupyter
+# lines with  # TROUBLE:
 
-# zsh & git
-sudo apt remove -y gitsome # gh command can conflict with gitsome if already installed
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update
-sudo apt install -y gh
-# check ok with 'gh --version'
+# # vs code
+# wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+# sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+# sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+# rm -f packages.microsoft.gpg
+# sudo apt update
+# sudo apt install -y code
 
-# direnv and zsh 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sudo apt-get update; sudo apt-get install direnv                           
-echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+# # vs code extensions
+# code --install-extension ms-vscode.sublime-keybindings
+# code --install-extension emmanuelbeziat.vscode-great-icons
+# code --install-extension MS-vsliveshare.vsliveshare
+# code --install-extension ms-python.python
+# code --install-extension KevinRose.vsc-python-indent
+# code --install-extension ms-python.vscode-pylance
+# code --install-extension ms-toolsai.jupyter
 
-# github CLI login, with SSH code setup
-gh auth login -s 'user:email' -w  
-# check ok with 'gh auth status'
+# # zsh & git
+# sudo apt remove -y gitsome # gh command can conflict with gitsome if already installed
+# curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+# echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+# sudo apt update
+# sudo apt install -y gh
+# # check ok with 'gh --version'
 
-# include:
-# to get git to default to SSH not HTTPS
-git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+# # direnv and zsh 
+# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# sudo apt-get update; sudo apt-get install direnv                           
+# echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+
+# # github CLI login, with SSH code setup
+# gh auth login -s 'user:email' -w  
+# # check ok with 'gh auth status'
+
+# # include:
+# # to get git to default to SSH not HTTPS
+# git config --global url.ssh://git@github.com/.insteadOf https://github.com/
 
 
-# dotfiles setup:
-export GITHUB_USERNAME=`gh api user | jq -r '.login'`
-echo $GITHUB_USERNAME
+# # dotfiles setup:
+# export GITHUB_USERNAME=`gh api user | jq -r '.login'`
+# echo $GITHUB_USERNAME
 
-mkdir -p ~/code/$GITHUB_USERNAME && cd $_
-gh repo fork lewagon/dotfiles --clone
+# mkdir -p ~/code/$GITHUB_USERNAME && cd $_
+# gh repo fork lewagon/dotfiles --clone
 
-cd ~/code/$GITHUB_USERNAME/dotfiles && zsh install.sh
+# cd ~/code/$GITHUB_USERNAME/dotfiles && zsh install.sh
 
-gh api user/emails | jq -r '.[].email'
-cd ~/code/$GITHUB_USERNAME/dotfiles && zsh git_setup.sh
+# gh api user/emails | jq -r '.[].email'
+# cd ~/code/$GITHUB_USERNAME/dotfiles && zsh git_setup.sh
 
 # disable SSH prompt
 code ~/.zshrc
@@ -66,12 +73,14 @@ code ~/.zshrc
 # ✔️ Save the .zshrc file with Ctrl + S and close your text editor.
 
 # pyenv
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+#  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 # add pyenv to path etc
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.zshrc
-exec zsh
+# echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+# echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+
+# TROUBLE:
+# echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+# exec zsh
 
 # pyenv python dependencies
 sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
@@ -80,7 +89,7 @@ libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-d
 python3-dev
 
 # python install
-pyenv install 3.10.6
+pyenv install {PYTHON_VERSION}
 exec zsh
 
 # install virtualenv and a few others
@@ -93,7 +102,7 @@ sudo apt-get install -y \
 	python3-pip
 
 # set virtual environment(s)
-pyenv virtualenv 3.10.6 initial_env
+pyenv virtualenv PYTHON_VERSION initial_env
 pyenv global initial_env
 
 # pip

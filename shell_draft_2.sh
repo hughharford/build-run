@@ -80,7 +80,7 @@ libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-d
 python3-dev
 
 # python install
-pyenv install 3.10.6
+pyenv install {PYTHON_VERSION}
 exec zsh
 
 # install virtualenv and a few others
@@ -93,7 +93,7 @@ sudo apt-get install -y \
 	python3-pip
 
 # set virtual environment(s)
-pyenv virtualenv 3.10.6 initial_env
+pyenv virtualenv PYTHON_VERSION initial_env
 pyenv global initial_env
 
 # pip

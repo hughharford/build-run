@@ -1,8 +1,6 @@
 # following data-setup from the awesome le wagon, and a few extras, noted under # included:
 # does exclude some steps, like Chrome, VS Code liveshare etc
 
-PYTHON_VERSION=3.12.6
-
 # vs code
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
@@ -54,6 +52,8 @@ cd ~/code/$GITHUB_USERNAME/dotfiles && zsh install.sh
 gh api user/emails | jq -r '.[].email'
 cd ~/code/$GITHUB_USERNAME/dotfiles && zsh git_setup.sh
 
+## WORKED PRETTY WELL UNTIL HERE (i think)
+
 # disable SSH prompt
 code ~/.zshrc
 
@@ -80,7 +80,7 @@ libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-d
 python3-dev
 
 # python install
-pyenv install 3.10.6
+pyenv install {PYTHON_VERSION}
 exec zsh
 
 # install virtualenv and a few others
@@ -93,7 +93,7 @@ sudo apt-get install -y \
 	python3-pip
 
 # set virtual environment(s)
-pyenv virtualenv 3.10.6 initial_env
+pyenv virtualenv PYTHON_VERSION initial_env
 pyenv global initial_env
 
 # pip
