@@ -15,3 +15,6 @@ apt list --installed | grep -v '^\s' > path/to/files/packages/apt-installed-pack
 
 
 apt list --installed | grep "\\[installed\\]" > path/to/files/apt-installed-user-packages.txt
+
+# see notebook: 
+reworking_packages_list.ipynb
